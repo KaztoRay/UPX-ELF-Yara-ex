@@ -1,0 +1,29 @@
+import "elf"
+
+rule upx_arm_391_lzma
+
+{
+
+	meta:
+
+		tool = "P"
+
+		name = "UPX"
+
+		version = "3.91 [LZMA]"
+
+		source = "Made by Retdec Team"
+
+		pattern = "00000000F04F2DE930D04DE200308DE50030D0E50250D0E501E0D0E500C09DE514308DE55C309DE50040A0E300408CE5004083E514C09DE50130D0E503308CE0"
+
+		start = 380
+
+	strings:
+
+		$1 = { 00 00 00 00 F0 4F 2D E9 30 D0 4D E2 00 30 8D E5 00 30 D0 E5 02 50 D0 E5 01 E0 D0 E5 00 C0 9D E5 14 30 8D E5 5C 30 9D E5 00 40 A0 E3 00 40 8C E5 00 40 83 E5 14 C0 9D E5 01 30 D0 E5 03 30 8C E0 }
+
+	condition:
+
+		$1 at elf.entry_point + 380
+
+}
